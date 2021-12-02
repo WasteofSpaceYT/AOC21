@@ -2019,15 +2019,26 @@ for i in depths:
 """
 #part 2
 # get increases in the sums of numbers classified in groups by letters
-
+depth1 = None
+depth2 = None
+depth3 = None
+increases = 0
+lastdepth = None
 for i in depths:
-    if(last_depth == None):
-        last_depth = i
-    else:
-        if(i > last_depth):
+    if((depths.index(i) + 1) % 3 == 1):
+        depth1 = i
+    elif((depths.index(i) + 1) % 3 == 2):
+        depth2 = i
+    elif((depths.index(i) + 1) % 3 == 0):
+        depth3 = i
+    if(depth1 != None and depth2 != None and depth3 != None):
+        if(lastdepth == None):
+            lastdepth = depth1 + depth2 + depth3
+        if(depth1 + depth2 + depth3 > lastdepth):
             print("increase")
             increases = increases + 1
-        else:
-            print("decrease")
-    last_depth = i
+        depth1 = None
+        depth2 = None
+        depth3 = None
     print(increases)
+    print(lastdepth)
